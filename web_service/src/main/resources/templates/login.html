@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet">
+    <link href="../static/css/me.css" rel="stylesheet">
+</head>
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<!--账户：root 密码：123456-->
+    <div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+        <div class="ui container">
+            <div class="ui middle aligned center aligned grid">
+                <div class="column">
+                    <h2 class="ui teal image header">
+                        <div class="content" style="font-size: 50px">
+                            Blog
+                        </div>
+                    </h2>
+
+                    <form class="ui large form" method="post" action="#" th:action="@{/loginConfirm}">
+                        <div class="ui segment">
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    <input type="text" name="username" id="username" placeholder="username">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="lock icon"></i>
+                                    <input type="password" name="password" id="password" placeholder="password">
+                                </div>
+                            </div>
+                            <button class="ui fluid large primary submit button" id="login">Login</button>
+                        </div>
+
+                        <div class="ui error mini message"></div>
+                        <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">username or password is wrong</div>
+
+                    </form>
+
+                    <div class="ui segment">
+                    <span style="color: teal; font-size: 25px">No not have account?</span>
+                    <a href="#" th:href="@{/register}"><button class="ui fluid large positive button">Sign up</button></a>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<th:block th:replace="_fragments :: script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</th:block>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+    $('.ui.form').form({
+        fields:{
+            username:{
+                identifier: 'username',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'please input username'
+                }]
+            },
+            password:{
+                identifier: 'password',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'please input password'
+                }]
+            }
+        }
+    })
+
+
+
+
+</script>
+
+
+</body>
+</html>

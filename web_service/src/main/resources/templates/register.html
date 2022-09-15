@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet">
+    <link href="../static/css/me.css" rel="stylesheet">
+</head>
+<body>
+
+<!--中间内容-->
+<div class="m-container m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui stackable grid">
+
+            <form name="sub" th:action="@{/registerConfirm}" th:method="post" class="ui large form">
+                <input type="hidden" name="id">
+                <input id="selectedImg" type="hidden" name="avatar" value="avatar0.png">
+
+                <div class="ui top attached segment">
+                    <div class="ui header">Register your account</div>
+                </div>
+
+                <div class="ui attached segment">
+                    Avatar: <img id="selectedAvatar" src="/images/avatar0.png" style="width: 100px">
+                    <br>
+                    <div onclick="selectAvatar0()" class="ui button"><img id="avatar0.png" src="/images/avatar0.png" style="width: 100px"></div>
+                    <div onclick="selectAvatar1()" class="ui button"><img id="avatar1.png" src="/images/avatar1.png" style="width: 100px"></div>
+                    <div onclick="selectAvatar2()" class="ui button"><img id="avatar2.png" src="/images/avatar2.png" style="width: 100px"></div>
+                    <div onclick="selectAvatar3()" class="ui button"><img id="avatar3.png" src="/images/avatar3.png" style="width: 100px"></div>
+                    <div onclick="selectAvatar4()" class="ui button"><img id="avatar4.png" src="/images/avatar4.png" style="width: 100px"></div>
+                    <div onclick="selectAvatar5()" class="ui button"><img id="avatar5.png" src="/images/avatar5.png" style="width: 100px"></div>
+                </div>
+
+                <div class="ui attached segment">
+                    <div class="field">
+                    Username:<input type="text" id="username" name="username" />
+                    </div>
+                </div>
+                <div class="ui attached segment">
+                    <div class="field">
+                    Password:<input type="text" id="password" name="password" />
+                    </div>
+                </div>
+                <div class="ui attached segment">
+                    Nickname:<input type="text" name="nickname" />
+                </div>
+                <div class="ui attached segment">
+                    Email:<input type="text" name="email" />
+                </div>
+                <div class="ui attached segment">
+                    QQ:<input type="text" name="qq" />
+                </div>
+                <div class="ui attached segment">
+                    WeChat:<input type="text" name="wechat" />
+                </div>
+                <button type="button" class="ui teal button" onclick="display_alert()">Register</button>
+                <button type="button" class="ui button" onclick="window.history.go(-1)">Back</button>
+
+                <div class="ui error mini message"></div>
+                <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}">username or password is wrong</div>
+
+
+            </form>
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+
+
+</footer>
+
+<th:block th:replace="_fragments :: script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</th:block>
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+
+    function selectAvatar0() {
+        const s = document.getElementById("avatar0.png").src;
+        var imgId=s.substring(s.lastIndexOf("/")+1);
+        document.getElementById('selectedImg').value = imgId;
+        console.log(imgId);
+        $('#selectedAvatar').attr('src',s);
+
+
+    }
+    function selectAvatar1() {
+        const s = document.getElementById("avatar1.png").src;
+        var imgId=s.substring(s.lastIndexOf("/")+1);
+        document.getElementById('selectedImg').value = imgId;
+        console.log(imgId);
+        $('#selectedAvatar').attr('src',s);
+    }
+    function selectAvatar2() {
+        const s = document.getElementById("avatar2.png").src;
+        var imgId=s.substring(s.lastIndexOf("/")+1);
+        document.getElementById('selectedImg').value = imgId;
+        console.log(imgId);
+        $('#selectedAvatar').attr('src',s);
+    }
+    function selectAvatar3() {
+        const s = document.getElementById("avatar3.png").src;
+        var imgId=s.substring(s.lastIndexOf("/")+1);
+        document.getElementById('selectedImg').value = imgId;
+        console.log(imgId);
+        $('#selectedAvatar').attr('src',s);
+    }
+    function selectAvatar4() {
+        const s = document.getElementById("avatar4.png").src;
+        var imgId=s.substring(s.lastIndexOf("/")+1);
+        document.getElementById('selectedImg').value = imgId;
+        console.log(imgId);
+        $('#selectedAvatar').attr('src',s);
+    }
+    function selectAvatar5() {
+        const s = document.getElementById("avatar5.png").src;
+        var imgId=s.substring(s.lastIndexOf("/")+1);
+        document.getElementById('selectedImg').value = imgId;
+        console.log(imgId);
+        $('#selectedAvatar').attr('src',s);
+    }
+
+    function display_alert() {
+        var b = confirm("Are you sure to register?");
+        if(b){
+            document.forms['sub'].submit();
+        }
+    }
+
+    $('.ui.form').form({
+        fields:{
+            username:{
+                identifier: 'username',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'please input username'
+                }]
+            },
+            password:{
+                identifier: 'password',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'please input password'
+                }]
+            },
+            nickname:{
+                identifier: 'nickname',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'please input nickname'
+                }]
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet">
+    <link href="../static/css/me.css" rel="stylesheet">
+</head>
+<body>
+
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(4)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+
+    </nav>
+
+    <!--中间内容-->
+    <div class="m-container m-padded-tb-big">
+        <div class="ui container">
+            <div class="ui stackable grid">
+                <div class="ui top attached segment">
+                    <div class="ui header">User Information</div>
+                </div>
+                <div class="ui attached segment">
+                    <p class="m-text">Avatar:</p>
+                    <img src="../static/images/avatar0.png" th:src="@{/images/{filename}(filename=${user.avatar})}" style="width: 100px">
+
+                </div>
+
+                <div class="ui attached segment">
+                    Username:<p class="m-text" th:text="${user.username}">username: root</p>
+                </div>
+                <div class="ui attached segment">
+                    Password:<p class="m-text" th:text="${user.password}">password: root</p>
+                </div>
+                <div class="ui attached segment">
+                    Nickname:<p class="m-text" th:text="${user.nickname}">nickname: 崔靖博</p>
+                </div>
+                <div class="ui attached segment">
+                    Email:<p class="m-text" th:text="${user.email}">email</p>
+                </div>
+                <div class="ui attached segment">
+                    <p class="m-text">Contact: </p>
+                    <div class="ui qq circular icon button" ><i class="qq icon"></i></div>
+                    <div class="ui qq-popup flowing popup transition hidden">
+                        <p th:text="${user.qq}">email</p>
+                    </div>
+
+                    <div class="ui wechat circular icon button"><i class="wechat icon"></i></div>
+                    <div class="ui wechat-popup flowing popup transition hidden">
+                        <p th:text="${user.wechat}">wechat</p>
+                    </div>
+                </div>
+                <div class="ui attached segment">
+                    <a href="#" th:href="@{/editUserInfo}"><button class="ui primary button">Edit Information</button></a>
+                </div>
+                <div class="ui bottom attached segment">
+                    <a href="#" th:href="@{/logout}"><button class="ui red button">Log Out</button></a>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <br>
+    <br>
+
+    <!--底部-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+
+    </footer>
+
+    <th:block th:replace="_fragments :: script">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    </th:block>
+    <script th:inline="javascript">
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
+        });
+
+        $('.ui.dropdown').dropdown({
+            on : 'hover'
+        });
+
+        $('.wechat').popup({
+            popup: $('.wechat-popup'),
+            on: 'hover',
+            position: 'bottom center'
+        })
+
+        $('.qq').popup()({
+            popup: $('.qq-popup'),
+            on: 'hover',
+            position: 'bottom center'
+        })
+
+
+    </script>
+</body>
+</html>
